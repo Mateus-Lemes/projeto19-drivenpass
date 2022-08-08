@@ -19,3 +19,12 @@ export async function createUser(user: User) {
     })
 }
 
+export async function findById(id:number) {
+    const user = await prisma.users.findFirst({
+        where: {
+            id
+        }
+    })
+    return user;
+}
+

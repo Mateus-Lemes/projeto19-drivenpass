@@ -1,4 +1,4 @@
-import { createUser, findUserByEmail, User } from "../Repositories/userRepositories.js";
+import { createUser, findById, findUserByEmail, User } from "../Repositories/userRepositories.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -38,4 +38,15 @@ export async function signInService(body: User) {
     const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY)
 
     return token
+}
+
+export async function findByUserId(id:number) {
+    const user = await findById(id);
+    if(!user) {
+        throw {
+            type: "Not Found",
+            message: "No user was found"
+        }
+    }
+    return user
 }
