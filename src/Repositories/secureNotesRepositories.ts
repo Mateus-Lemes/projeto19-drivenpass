@@ -39,3 +39,20 @@ export async function findSecureNoteByUserIdAndId(userId: number, id: number) {
     })
     return secureNote
 }
+
+export async function deleteSecureNote(id: number) {
+    await prisma.secureNotes.delete({
+        where: {
+            id
+        }
+    })
+}
+
+export async function findSecureNoteById(id: number) {
+    const secureNote = await prisma.secureNotes.findFirst({
+        where: {
+            id
+        }
+    })
+    return secureNote
+}

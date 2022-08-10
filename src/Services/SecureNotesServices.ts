@@ -1,4 +1,4 @@
-import { createSecureNote, findSecureNoteByUserId, findSecureNoteByUserIdAndId, findSecureNoteByUserIdAndTitle, SecureNote } from "../Repositories/secureNotesRepositories.js";
+import { createSecureNote, deleteSecureNote, findSecureNoteById, findSecureNoteByUserId, findSecureNoteByUserIdAndId, findSecureNoteByUserIdAndTitle, SecureNote } from "../Repositories/secureNotesRepositories.js";
 
 
 export async function createSecureNoteService(secureNote: SecureNote, userId: number) {
@@ -34,4 +34,16 @@ export async function getSecureNotesService(userId: number, id: number) {
             }
         }
         return secureNote
+}
+
+export async function deleteSecureNoteService(id: number) {
+    const secureNote:any = await findSecureNoteById(id)
+
+    if(!secureNote) {
+        throw {
+            type: "not found",
+            message: "Não existe esta nota para ser excluída"
+        }
+    }
+    await deleteSecureNote(id);
 }
