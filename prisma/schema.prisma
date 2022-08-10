@@ -47,11 +47,11 @@ model SecureNotes {
 model Cards {
   id Int @id @default(autoincrement())
   cardTitle String
-  cardNumber Int @unique
+  cardNumber String @unique
   printedName String
-  securityCode Int
+  securityCode String
   expirationDate String
-  cardPassword Int
+  cardPassword String
   virtual Boolean
   debit Boolean
   credit Boolean
