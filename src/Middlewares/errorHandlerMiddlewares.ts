@@ -13,6 +13,6 @@ export default function errorHandlerMiddlewares(error, req: Request, res: Respon
         return res.status(401).send(error.mensage);
     }
 
-    console.log(error);
+    console.log("começo",error.message, "aqui a mensagem");
     res.status(500).send("Unknown error");
 }
