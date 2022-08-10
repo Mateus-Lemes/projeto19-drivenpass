@@ -65,7 +65,7 @@ export async function deleteCardService(id: number) {
     if(!card) {
         throw {
             type: "not found",
-            message: "Não existe esta nota para ser excluída"
+            message: "Não existe este cartão para ser excluído"
         }
     }
     await deleteCard(id);

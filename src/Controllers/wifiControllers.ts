@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createWifiService, getWifiService } from "../Services/wifiServices.js";
+import { createWifiService, deleteWifiService, getWifiService } from "../Services/wifiServices.js";
 
 export async function createWifiController(req: Request, res: Response) {
     
@@ -13,4 +13,10 @@ export async function getWifiController(req: Request, res: Response) {
     const wifi = await getWifiService(res.locals.user.id, +req.query.id);
 
     res.status(200).send(wifi);
+}
+
+export async function deleteWifiController(req: Request, res: Response) {
+    await deleteWifiService(+req.params.id)
+
+    res.sendStatus(200)
 }

@@ -28,3 +28,20 @@ export async function findWifiByUserIdAndId(userId: number, id: number) {
     })
     return wifi
 }
+
+export async function deleteWifi(id: number) {
+    await prisma.wifi.delete({
+        where: {
+            id
+        }
+    })
+}
+
+export async function findWifiById(id: number) {
+    const wifi = await prisma.wifi.findFirst({
+        where: {
+            id
+        }
+    })
+    return wifi
+}

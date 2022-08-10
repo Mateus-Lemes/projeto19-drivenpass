@@ -1,5 +1,5 @@
 import Cryptr from "cryptr";
-import { createWifi, Wifis, findWifiByUserId, findWifiByUserIdAndId } from "../Repositories/wifiRepositories.js";
+import { createWifi, Wifis, findWifiByUserId, findWifiByUserIdAndId, findWifiById, deleteWifi } from "../Repositories/wifiRepositories.js";
 const cryptr = new Cryptr(process.env.SECRET_KEY);
 
 export async function createWifiService(wifi: Wifis, userId: number) {
@@ -34,13 +34,25 @@ export async function getWifiService(userId: number, id: number) {
         return wifiArray
     }
 
-        const wifi = await findWifiByUserIdAndId(userId, id)
-        if (!wifi) {
-            throw {
-                type: "not found",
-                message: "não existe nenhum wifi"
-            }
+    const wifi = await findWifiByUserIdAndId(userId, id)
+    if (!wifi) {
+        throw {
+            type: "not found",
+            message: "não existe nenhum wifi"
         }
-        const objectWifi = {...wifi, wifiPassword: cryptr.decrypt(wifi.wifiPassword)}
-        return objectWifi
+    }
+    const objectWifi = {...wifi, wifiPassword: cryptr.decrypt(wifi.wifiPassword)}
+    return objectWifi
+}
+
+export async function deleteWifiService(id: number) {
+    const wifi:any = await findWifiById(id)
+
+    if(!wifi) {
+        throw {
+            type: "not found",
+            message: "Não existe este wifi para ser excluído"
+        }
+    }
+    await deleteWifi(id);
 }
