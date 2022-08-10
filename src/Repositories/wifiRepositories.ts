@@ -9,3 +9,22 @@ export async function createWifi(wifi: NewWifi) {
         data: wifi
     })
 }
+
+export async function findWifiByUserId(userId: number) {
+    const wifi = await prisma.wifi.findMany({
+        where: {
+            userId
+        }
+    })
+    return wifi
+}
+
+export async function findWifiByUserIdAndId(userId: number, id: number) {
+    const wifi = await prisma.wifi.findFirst({
+        where: {
+            userId,
+            id
+        }
+    })
+    return wifi
+}

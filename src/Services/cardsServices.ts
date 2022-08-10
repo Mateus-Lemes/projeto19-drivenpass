@@ -41,8 +41,8 @@ export async function getCardsService(userId: number, id: number) {
         
         let cardsArray = []
             cards.forEach((card:any) => {
-                let objectCredential = {...card, cardPassword: cryptr.decrypt(card.cardPassword), securityCode: cryptr.decrypt(card.securityCode)}
-                cardsArray = [...cardsArray, objectCredential]
+                let objectCards = {...card, cardPassword: cryptr.decrypt(card.cardPassword), securityCode: cryptr.decrypt(card.securityCode)}
+                cardsArray = [...cardsArray, objectCards]
             })
         
         return cardsArray
